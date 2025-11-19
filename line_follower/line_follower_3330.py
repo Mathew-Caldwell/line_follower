@@ -9,7 +9,7 @@ class MinimalSubscriber(Node):
         self.subscription  # prevent unused variable warning
 
     def listener_callback(self, msg):
-        self.get_logger().info(f'I heard: ')
+        self.get_logger().info(f'I heard: {msg.range}')
 
 
 def main(args=None):
