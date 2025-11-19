@@ -5,7 +5,7 @@ from sensor_msgs.msg import Range
 class MinimalSubscriber(Node):
     def __init__(self):
         super().__init__('minimal_subscriber')
-        self.subscription = self.create_subscription(Range,'/e_puck/gs0',self.listener_callback,10)
+        self.subscription = self.create_subscription(Range,'ps0',self.listener_callback,10)
         self.subscription  # prevent unused variable warning
 
     def listener_callback(self, msg):
