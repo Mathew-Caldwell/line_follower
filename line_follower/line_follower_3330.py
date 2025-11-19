@@ -12,14 +12,12 @@ class MinimalSubscriber(Node):
         self.subscription  # prevent unused variable warning
 
         self.publisher_ = self.create_publisher(TwistStamped, 'cmd_vel', 10)
-        timer_period = 0.5  # seconds
-        self.timer = self.create_timer(timer_period, self.ahaha)
+        #timer_period = 0.5  # seconds
+        #self.timer = self.create_timer(timer_period, self.ahaha)
 
 
     def listener_callback(self, msg):
         self.get_logger().info(f'I heard: {msg.range}')
-
-    def ahaha(self):
         twist_stamped_msg = TwistStamped()
 
         # Create Header
