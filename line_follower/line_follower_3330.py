@@ -1,16 +1,15 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String
-
+from sensor_msgs.msg import Range
 
 class MinimalSubscriber(Node):
     def __init__(self):
         super().__init__('minimal_subscriber')
-        self.subscription = self.create_subscription(String,'e_puck/gs0',self.listener_callback,10)
+        self.subscription = self.create_subscription(Range,'/e_puck/gs0',self.listener_callback,10)
         self.subscription  # prevent unused variable warning
 
     def listener_callback(self, msg):
-        self.get_logger().info('I heard: "%s"' % msg.data)
+        self.get_logger().info(f'I heard: ')
 
 
 def main(args=None):
