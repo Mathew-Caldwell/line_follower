@@ -8,7 +8,7 @@ class MinimalSubscriber(Node):
     def __init__(self):
         super().__init__('minimal_subscriber')
         
-        self.subscription = self.create_subscription(Range,'ps0',self.listener_callback,10)
+        self.subscription = self.create_subscription(Range,'ps7',self.listener_callback,10)
         self.subscription  # prevent unused variable warning
 
         self.publisher_ = self.create_publisher(TwistStamped, 'cmd_vel', 10)
@@ -17,7 +17,9 @@ class MinimalSubscriber(Node):
 
 
     def listener_callback(self, msg):
-        self.get_logger().info(f'I heard: {msg.range}')
+        sensor_range = float(msg.range)
+        self.get_logger().info(f"{msg.range}")
+
         twist_stamped_msg = TwistStamped()
 
         # Create Header
@@ -29,6 +31,11 @@ class MinimalSubscriber(Node):
         twist_msg = Twist()
         twist_msg.linear = Vector3(x=0.1, y=0.0, z=0.0)
         twist_msg.angular = Vector3(x=0.0, y=0.0, z=0.0)
+
+        if sensor_range <= 0.063:
+            twist_msg.linear = Vector3(x=0.1, y=0.0, z=0.0)
+            twist_msg.angular = Vector3(x=0.0, y=0.0, z=-0.5)
+
         twist_stamped_msg.twist = twist_msg
         self.publisher_.publish(twist_stamped_msg)
         self.get_logger().info(f'Publishing: Linear x={twist_stamped_msg.twist.linear.x}, Angular z={twist_stamped_msg.twist.angular.z}')
