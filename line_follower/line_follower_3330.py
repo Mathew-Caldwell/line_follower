@@ -34,7 +34,7 @@ class MinimalSubscriber(Node):
         twist_msg.linear = Vector3(x=0.1, y=0.0, z=0.0)
         twist_msg.angular = Vector3(x=0.0, y=0.0, z=0.0)
 
-        if sensor_range <= 0.0675:
+        if sensor_range <= 0.06:
             twist_msg.linear = Vector3(x=0.001, y=0.0, z=0.0)
             twist_msg.angular = Vector3(x = 0.0, y = 0.0, z = -0.9)
 
